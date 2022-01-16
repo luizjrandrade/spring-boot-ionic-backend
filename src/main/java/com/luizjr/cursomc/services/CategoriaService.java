@@ -3,10 +3,12 @@ package com.luizjr.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.luizjr.cursomc.domain.Categoria;
 import com.luizjr.cursomc.repositories.CategoriaRepository;
+import com.luizjr.cursomc.services.exceptions.DataIntegrityException;
 import com.luizjr.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -29,5 +31,15 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId()); //chamando método para pesquisar o ID no banco
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Exclusão não permitida por conter produtos!");
+		}
+		
 	}
 }
