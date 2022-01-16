@@ -44,6 +44,7 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Exclusão não permitida por conter produtos!");
 		}	
+
 	}
 	
 	public List<Categoria> findAll(){
