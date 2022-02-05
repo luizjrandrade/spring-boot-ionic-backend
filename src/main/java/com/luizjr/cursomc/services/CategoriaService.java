@@ -34,9 +34,16 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) {
-		find(obj.getId()); //chamando método para pesquisar o ID no banco
-		return repo.save(obj);
+		Categoria newObj = find(obj.getId()); //chamando método para pesquisar o ID no banco
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
+	
+	
+	//public Categoria update(Categoria obj) {
+	//	find(obj.getId()); //chamando método para pesquisar o ID no banco
+	//	return repo.save(obj);
+	//}
 	
 	public void delete(Integer id) {
 		find(id);
@@ -59,6 +66,11 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(), objDto.getNome());
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setName(obj.getName());
+		
 	}
 	
 }
