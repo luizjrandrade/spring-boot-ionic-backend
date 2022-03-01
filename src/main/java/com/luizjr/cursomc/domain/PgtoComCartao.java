@@ -2,9 +2,11 @@ package com.luizjr.cursomc.domain;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.luizjr.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pgtoComCartao")
 public class PgtoComCartao extends Pagamento{
 	private static final long serialVersionUID = 1L;
 	

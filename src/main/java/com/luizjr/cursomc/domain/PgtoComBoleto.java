@@ -5,9 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.luizjr.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pgtoComBoleto")
 public class PgtoComBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 
