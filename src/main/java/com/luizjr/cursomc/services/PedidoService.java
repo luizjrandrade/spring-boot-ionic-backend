@@ -47,7 +47,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
-		obj.setCliente(clienteService.find(obj.getCliente().getId()));
+		obj.setCliente(clienteService.find(obj.getCliente().getId())); //busca cliente inteiro no banco
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if (obj.getPagamento() instanceof PgtoComBoleto) {
@@ -58,11 +58,12 @@ public class PedidoService {
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setProduto(produtoService.find(ip.getProduto().getId()));
+			ip.setProduto(produtoService.find(ip.getProduto().getId())); //busca produto inteiro no banco
 			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		return(obj);
 	}
 }
