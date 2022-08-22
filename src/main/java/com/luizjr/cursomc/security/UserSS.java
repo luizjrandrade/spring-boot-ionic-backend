@@ -75,5 +75,10 @@ public class UserSS implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	//necessario converter para o perfil GrantedAuthority e testa se o usuario tem um determinado perfil
+	public boolean hasRole(Perfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}
 
 }
